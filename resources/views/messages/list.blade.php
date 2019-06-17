@@ -1,6 +1,6 @@
 <h1>Lista de Mensagens</h1>
 <hr>
-<p><a href="/messages/create"><b>Cadastrar</b></a>  -  <a href="/messages"><b>Refresh</b></a></p>
+<p>@auth<a href="/messages/create"><b>Cadastrar</b></a>  -  @endauth<a href="/messages"><b>Refresh</b></a></p>
 <hr>
 
 <!--Mensagem -->
@@ -31,6 +31,9 @@
 	<p><a href="/messages/{{$m->id}}">{{$m->titulo}}</a></p>
 	<p>{{$m->texto}}</p>
 	<p>{{$m->autor}}</p>
+	@auth
+	<p>Ações:  <a href="/messages/{{$m->id}}"><b>Ver Mais</b></a>  -  <a href="/messages/{{$m->id}}/edit"><b>Editar</b></a>  -  <a href="/messages/{{$m->id}}/delete"><b>Excluir</b></a></p>
+	@endauth
 	<br>
 	<hr>
 @endforeach

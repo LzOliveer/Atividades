@@ -16,23 +16,30 @@ Route::get('/', function () {
 });
 
 Route::get('/atividades', 'AtividadeController@index');
-Route::get('/atividades/create', 'AtividadeController@create');
-Route::post('/atividades', 'AtividadeController@store');
-Route::get('/atividades/{id}', 'AtividadeController@show');
-Route::get('/atividades/{id}/edit', 'AtividadeController@edit');
-Route::put('/atividades/{id}', 'AtividadeController@update');
-Route::get('/atividades/{id}/delete', 'AtividadeController@delete');
-Route::delete('/atividades/{id}', 'AtividadeController@destroy');
 
 Route::get('/messages', 'messageController@index');
-Route::get('/messages/create', 'messageController@create');
-Route::post('/messages', 'messageController@store');
-Route::get('/messages/{id}', 'messageController@show');
-Route::get('/messages/{id}/edit', 'messageController@edit');
-Route::put('/messages/{id}', 'messageController@update');
-Route::get('/messages/{id}/delete', 'messageController@delete');
-Route::delete('/messages/{id}', 'messageController@destroy');
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/messages/create', 'messageController@create');
+    Route::post('/messages', 'messageController@store');
+    Route::get('/messages/{id}', 'messageController@show');
+    Route::get('/messages/{id}/edit', 'messageController@edit');
+    Route::put('/messages/{id}', 'messageController@update');
+    Route::get('/messages/{id}/delete', 'messageController@delete');
+    Route::delete('/messages/{id}', 'messageController@destroy');
+
+    Route::get('/atividades/create', 'AtividadeController@create');
+    Route::post('/atividades', 'AtividadeController@store');
+    Route::get('/atividades/{id}', 'AtividadeController@show');
+    Route::get('/atividades/{id}/edit', 'AtividadeController@edit');
+    Route::put('/atividades/{id}', 'AtividadeController@update');
+    Route::get('/atividades/{id}/delete', 'AtividadeController@delete');
+    Route::delete('/atividades/{id}', 'AtividadeController@destroy');
+});
 
 //php artisan key:generate
 //composer dump-autoload
 //php artisan migrate --seed
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

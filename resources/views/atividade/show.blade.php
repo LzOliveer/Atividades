@@ -1,5 +1,7 @@
 <h1>Lista de Atividades - Detalhes da Atividade nº {{$atividade->id}}</h1>
 <hr>
+<p>Logado como: {{$nome = auth()->user()->name}} ({{$email = auth()->user()->email}})</p>
+<hr>
 <h3><b>ID:</b> {{$atividade->id}} </h3>
 <h3><b>Título:</b> {{\Carbon\Carbon::parse($atividade->scheduledto)->format('d/m/Y h:m')}} </h3>
 <h3><b>Descrição:</b> {{$atividade->description}} </h3>
